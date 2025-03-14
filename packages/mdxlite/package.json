@@ -1,0 +1,62 @@
+{
+  "name": "mdxlite",
+  "version": "0.0.1",
+  "description": "A minimal MDX runtime for constrained environments",
+  "homepage": "TODO",
+  "author": {
+    "name": "Matt Hamlin",
+    "email": "matthewjameshamlin@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamlim/mdxlite.git",
+    "directory": "packages/mdxlite"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    }
+  },
+  "files": ["dist", "CHANGELOG.md", "README.md"],
+  "type": "module",
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^17.4.4",
+    "@swc/cli": "0.3.10",
+    "@swc/core": "1.4.2",
+    "@types/bun": "1.1.11",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "hast-util-to-jsx-runtime": "2.3.6",
+    "hohoro": "0.3.0",
+    "html-url-attributes": "3.0.1",
+    "react-dom": "19.0.0",
+    "remark-parse": "11.0.0",
+    "remark-rehype": "11.0.0",
+    "typescript": "5.4.5",
+    "unified": "11.0.5",
+    "unist-util-visit": "5.0.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "unified": "^11.0.5",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.0.0",
+    "unist-util-visit": "^5.0.0",
+    "html-url-attributes": "^3.0.1",
+    "hast-util-to-jsx-runtime": "^2.3.6"
+  },
+  "scripts": {
+    "dev": "node --watch-path=./src dev.mjs",
+    "build": "hohoro-experimental",
+    "type-check": "tsc -p ./tsconfig.json",
+    "lint": "biome lint ./src/",
+    "test": "bun test",
+    "prepub": "bun run build && bun run type-check && bun run lint && bun run test",
+    "pub": "npm publish --access public"
+  }
+}
