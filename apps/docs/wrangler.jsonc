@@ -1,0 +1,12 @@
+{
+  "name": "garbanzo-template",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./dist/worker/serve-cloudflare.js",
+  "assets": {
+    "directory": "./dist/assets",
+    "binding": "ASSETS",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

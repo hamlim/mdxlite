@@ -1,0 +1,44 @@
+{
+  "name": "@garbanzo/template",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build-cf-types": "wrangler types --experimental-include-runtime",
+    "dev": "garbanzo dev",
+    "build": "garbanzo build",
+    "start": "wrangler dev",
+    "predeploy": "bun run build",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "hono": "4.6.20",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-server-dom-webpack": "19.0.0",
+    "waku": "0.21.22",
+    "wrangler": "3.109.1"
+  },
+  "imports": {
+    "#utils/*": "./src/utils/*"
+  },
+  "devDependencies": {
+    "@garbanzo/cli": "*",
+    "@mdx-js/mdx": "3.1.0",
+    "@mdx-js/rollup": "3.1.0",
+    "@shikijs/rehype": "2.4.2",
+    "@tailwindcss/postcss": "4.0.6",
+    "@types/node": "22.13.0",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "miniflare": "3.20250129.0",
+    "postcss": "8.5.2",
+    "rehype-mdx-code-props": "3.0.1",
+    "remark-flexible-markers": "1.2.1",
+    "remark-frontmatter": "5.0.0",
+    "remark-gfm": "4.0.1",
+    "remark-mdx-frontmatter": "5.0.0",
+    "tailwindcss": "4.0.6",
+    "typescript": "5.7.3"
+  }
+}

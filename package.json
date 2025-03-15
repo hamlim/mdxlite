@@ -1,15 +1,12 @@
 {
   "name": "root",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "private": true,
   "devDependencies": {
-    "@turbo/gen": "2.4.2",
+    "@turbo/gen": "2.4.4",
     "knip": "5.25.2",
     "one-version": "0.2.0",
-    "turbo": "2.4.2",
+    "turbo": "2.4.4",
     "@biomejs/biome": "1.9.4"
   },
   "scripts": {
