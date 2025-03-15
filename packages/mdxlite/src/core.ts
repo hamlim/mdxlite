@@ -37,14 +37,14 @@ export function createProcessor(
 }
 
 export function createFile(options: Options): VFile {
-  let children = options.children || "";
+  let markdown = options.markdown || "";
   let file = new VFile();
 
-  if (typeof children === "string") {
-    file.value = children;
+  if (typeof markdown === "string") {
+    file.value = markdown;
   } else {
     throw new Error(
-      `Unexpected value \`${children}\` for \`children\` prop, expected \`string\``,
+      `Unexpected value \`${markdown}\` for \`markdown\` prop, expected \`string\``,
     );
   }
 

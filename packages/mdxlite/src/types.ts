@@ -27,14 +27,14 @@ export type Components = {
 };
 
 export type Options = {
+  /** Markdown. */
+  markdown?: string | null | undefined;
+  /** Map tag names to components. */
+  components?: Components | null | undefined;
   /** Filter elements (optional); `allowedElements` / `disallowedElements` is used first. */
   allowElement?: AllowElement | null | undefined;
   /** Tag names to allow (default: all tag names); cannot combine w/ `disallowedElements`. */
   allowedElements?: ReadonlyArray<string> | null | undefined;
-  /** Markdown. */
-  children?: string | null | undefined;
-  /** Map tag names to components. */
-  components?: Components | null | undefined;
   /** Tag names to disallow (default: `[]`); cannot combine w/ `allowedElements`. */
   disallowedElements?: ReadonlyArray<string> | null | undefined;
   /** List of rehype plugins to use. */

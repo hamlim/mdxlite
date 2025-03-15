@@ -1,6 +1,6 @@
 {
   "name": "mdxlite",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "A minimal MDX runtime for constrained environments",
   "homepage": "TODO",
   "author": {
@@ -16,16 +16,12 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./client": {
-      "import": "./dist/client.js",
-      "types": "./dist/client.d.ts"
     }
   },
   "files": ["dist", "CHANGELOG.md", "README.md"],
   "type": "module",
   "devDependencies": {
-    "@happy-dom/global-registrator": "^17.4.4",
+    "@happy-dom/global-registrator": "17.4.4",
     "@swc/cli": "0.3.10",
     "@swc/core": "1.4.2",
     "@types/bun": "1.1.11",

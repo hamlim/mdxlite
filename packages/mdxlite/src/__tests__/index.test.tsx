@@ -1,6 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import { renderToReadableStream } from "react-dom/server";
-import { AsyncMarkdown } from "../index";
+import { transformMarkdown } from "../index";
 
 let markdownString = `
 # Hello, world!
@@ -8,8 +8,13 @@ let markdownString = `
 This is a test of the mdxlite runtime.
 `;
 
-describe("AsyncMarkdown", () => {
+describe("transformMarkdown", () => {
   it("should render", async () => {
+    function AsyncMarkdown({ children }: { children: string }) {
+      return transformMarkdown({
+        markdown: children,
+      });
+    }
     const stream = await renderToReadableStream(
       <AsyncMarkdown>{markdownString}</AsyncMarkdown>,
     );

@@ -26,9 +26,9 @@
     },
     "packages/mdxlite": {
       "name": "mdxlite",
-      "version": "0.0.1",
+      "version": "0.1.0",
       "devDependencies": {
-        "@happy-dom/global-registrator": "^17.4.4",
+        "@happy-dom/global-registrator": "17.4.4",
         "@swc/cli": "0.3.10",
         "@swc/core": "1.4.2",
         "@types/bun": "1.1.11",
