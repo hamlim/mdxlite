@@ -2,7 +2,7 @@
   "name": "mdxlite",
   "version": "0.2.0",
   "description": "A minimal MDX runtime for constrained environments",
-  "homepage": "TODO",
+  "homepage": "https://mdxlite-docs.mhamlin.workers.dev/",
   "author": {
     "name": "Matt Hamlin",
     "email": "matthewjameshamlin@gmail.com"
