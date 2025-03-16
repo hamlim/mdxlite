@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes: emerald --default, dim --prefersdark;
+}
+
 @theme {
   --color-primary: var(--color-emerald-500);
   --color-secondary: var(--color-blue-500);
