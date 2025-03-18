@@ -30,9 +30,9 @@ let markdown = `# \`mdxlite\`
 
 A minimal MDX runtime for constrained environments, e.g. Cloudflare Workers.
 
-\`@mdx-js/mdx\` runtime usage (e.g. \`evaluate\` or \`evaulateSync\`) requires use of \`eval\` in order to transform markdown to executable JS, unfortunately not all environments support that, e.g. Cloudflare Workers.
+\`@mdx-js/mdx\` usage during runtime requires use of \`eval\` (\`evaluate\` and \`evaluateSync\`) in order to transform and run mdx, unfortunately not all environments allow for use of \`eval\` - like Cloudflare Workers.
 
-\`mdxlite\` works a bit like \`@mdx-js/mdx\` but is much simpler in that you can take a string of markdown with JSX and transforms it without using \`eval\` or \`new Function()\`.
+\`mdxlite\` works similar to \`@mdx-js/mdx\`, in that you can take a string of markdown with JSX and transform it, yet does so without using \`eval\` or \`new Function()\`!
 
 ## Getting Started:
 
