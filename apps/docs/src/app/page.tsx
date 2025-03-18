@@ -80,9 +80,19 @@ export type AllowElement = (
 export type ExtraProps = { node?: Element };
 
 export type Components = {
-  [Key in keyof JSX.IntrinsicElements]? :
-    ComponentType<JSX.IntrinsicElements[Key] & ExtraProps> | keyof JSX.IntrinsicElements
+  [Key in keyof JSX.IntrinsicElements | string]:
+    Key extends keyof JSX.IntrinsicElements
+      ? ComponentType<JSX.IntrinsicElements[Key] & ExtraProps> | keyof JSX.IntrinsicElements
+      : ComponentType<any> | keyof JSX.IntrinsicElements
 };
+
+export type ModuleValue = any;
+
+export type ModuleLike =
+  | ModuleValue
+  | (() => ModuleValue)
+  | (() => Promise<ModuleValue>)
+  | Promise<ModuleValue>;
 
 export type Options = {
   markdown?: string | null | undefined;
@@ -90,6 +100,10 @@ export type Options = {
   // If you want to have these elements replace html / raw JSX within the markdown
   // you'll want to use the \`rehype-raw\` plugin as well
   components?: Components | null | undefined;
+  // A mapping of import sources to modules
+  imports?: Record<string, ModuleLike>;
+
+  
   allowElement?: AllowElement | null | undefined;
   allowedElements?: ReadonlyArray<string> | null | undefined;
   disallowedElements?: ReadonlyArray<string> | null | undefined;
