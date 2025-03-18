@@ -18,6 +18,11 @@ export default function Root({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head suppressHydrationWarning>
         <title>mdxlite</title>
+        <meta
+          name="description"
+          content="A minimal MDX runtime for constrained environments"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
         <script
