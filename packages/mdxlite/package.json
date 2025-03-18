@@ -1,6 +1,6 @@
 {
   "name": "mdxlite",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A minimal MDX runtime for constrained environments",
   "homepage": "https://mdxlite-docs.mhamlin.workers.dev/",
   "author": {
@@ -35,13 +35,20 @@
     "remark-rehype": "11.0.0",
     "typescript": "5.4.5",
     "unified": "11.0.5",
-    "unist-util-visit": "5.0.0"
+    "unist-util-visit": "5.0.0",
+    "sval": "0.6.3",
+    "estree-util-visit": "2.0.0",
+    "remark-mdx": "3.1.0",
+    "@types/estree": "1.0.6"
   },
   "peerDependencies": {
     "react": "*",
+    "sval": "^0.6.3",
+    "estree-util-visit": "^2.0.0",
     "unified": "^11.0.5",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.0.0",
+    "remark-mdx": "^3.1.0",
     "unist-util-visit": "^5.0.0",
     "html-url-attributes": "^3.0.1",
     "hast-util-to-jsx-runtime": "^2.3.6"

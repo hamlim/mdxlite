@@ -1,30 +1,53 @@
+import type { Expression, Program } from "estree";
+import { visit as estreeVisit } from "estree-util-visit";
 import type { Root } from "hast";
-import { toJsxRuntime } from "hast-util-to-jsx-runtime";
+import { type Evaluater, toJsxRuntime } from "hast-util-to-jsx-runtime";
 import { urlAttributes } from "html-url-attributes";
 import type { ReactElement } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import remarkMdx from "remark-mdx";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import type { Options as RemarkRehypeOptions } from "remark-rehype";
+import Sval from "sval";
 import type { PluggableList, Processor } from "unified";
 import { unified } from "unified";
 import { visit } from "unist-util-visit";
 import type { BuildVisitor } from "unist-util-visit";
 import { VFile } from "vfile";
-import type { Options } from "./types";
+import type { Components, ModuleLike, Options } from "./types";
 
 let emptyPlugins: Array<PluggableList> = [];
 let emptyRemarkRehypeOptions: Readonly<RemarkRehypeOptions> = {
   allowDangerousHtml: true,
+  passThrough: [
+    "mdxjsEsm",
+    "mdxFlowExpression",
+    "mdxJsxFlowElement",
+    "mdxJsxTextElement",
+    "mdxTextExpression",
+  ],
 };
+let defaultRemarkPlugins = [remarkMdx];
 
 export function createProcessor(
   options: Options,
 ): Processor<Root, Root, Root, undefined, undefined> {
   let rehypePlugins = options.rehypePlugins || emptyPlugins;
-  let remarkPlugins = options.remarkPlugins || emptyPlugins;
+  let remarkPlugins = [
+    ...(options.remarkPlugins || emptyPlugins),
+    ...defaultRemarkPlugins,
+  ];
   let remarkRehypeOptions = options.remarkRehypeOptions
-    ? { ...options.remarkRehypeOptions, ...emptyRemarkRehypeOptions }
+    ? {
+        ...options.remarkRehypeOptions,
+        ...emptyRemarkRehypeOptions,
+        passThrough: [
+          ...(options.remarkRehypeOptions.passThrough || []),
+          // @ts-expect-error: passThrough is an array, so it's spreadable
+          ...emptyRemarkRehypeOptions.passThrough,
+        ],
+      }
     : emptyRemarkRehypeOptions;
 
   let processor = unified()
@@ -78,6 +101,90 @@ export function defaultUrlTransform(value: string): string | undefined | null {
   return "";
 }
 
+function createEvaluater({
+  imports,
+  components,
+}: Partial<Options> = {}): Evaluater {
+  let interpreter = new Sval({
+    sandBox: true,
+    sourceType: "module",
+  });
+  if (typeof imports !== "undefined") {
+    interpreter.import(imports);
+  }
+  // major hack:
+  // essentially we're adding the custom components to the module scope
+  if (typeof components !== "undefined" && components !== null) {
+    interpreter.import({
+      "./__secret_do_not_use_in_real_code_pls": {
+        ...components,
+      },
+    });
+    let script = `import { ${Object.keys(components).join(", ")} } from "./__secret_do_not_use_in_real_code_pls";`;
+    interpreter.run(script);
+  }
+  let id = 0;
+  return {
+    evaluateExpression(expression: Expression) {
+      let exportName = `_evaluateExpressionValue_${id++}`;
+      let program = {
+        type: "Program",
+        start: 0,
+        end: 41,
+        body: [
+          {
+            type: "ExportNamedDeclaration",
+            start: 0,
+            end: 41,
+            declaration: {
+              type: "VariableDeclaration",
+              start: 7,
+              end: 41,
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  start: 11,
+                  end: 41,
+                  id: {
+                    type: "Identifier",
+                    start: 11,
+                    end: 35,
+                    name: exportName,
+                  },
+                  init: expression,
+                },
+              ],
+              kind: "let",
+            },
+            specifiers: [],
+            source: null,
+          },
+        ],
+        sourceType: "module",
+      };
+
+      interpreter.run(program);
+      const value = interpreter.exports[exportName];
+      return value;
+    },
+    evaluateProgram(program: Program) {
+      estreeVisit(program, (node, key, index, parents) => {
+        // Sval doesn’t support exports yet.
+        // so we hoist the exported declarations to the parent scope.
+        // e.g. `export const a = 1` becomes `const a = 1;`
+        if (node.type === "ExportNamedDeclaration" && node.declaration) {
+          const parent = parents[parents.length - 1];
+          // @ts-expect-error: key should always be a string here
+          parent[key][index] = node.declaration;
+        }
+      });
+
+      // @ts-expect-error: note: `sval` types are wrong, programs are nodes.
+      interpreter.run(program);
+    },
+  };
+}
+
 export function post(tree: Root, options: Options): ReactElement {
   let allowedElements = options.allowedElements;
   let allowElement = options.allowElement;
@@ -86,6 +193,7 @@ export function post(tree: Root, options: Options): ReactElement {
   let skipHtml = options.skipHtml;
   let unwrapDisallowed = options.unwrapDisallowed;
   let urlTransform = options.urlTransform || defaultUrlTransform;
+  let evaluater = createEvaluater(options);
 
   if (allowedElements && disallowedElements) {
     throw new Error(
@@ -103,6 +211,9 @@ export function post(tree: Root, options: Options): ReactElement {
     jsxs,
     passKeys: true,
     passNode: true,
+    createEvaluater() {
+      return evaluater;
+    },
   });
 
   type TransformParams = Parameters<BuildVisitor<Root>>;

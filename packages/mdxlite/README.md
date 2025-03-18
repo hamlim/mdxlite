@@ -2,9 +2,9 @@
 
 A minimal MDX runtime for constrained environments, e.g. Cloudflare Workers.
 
-`@mdx-js/mdx` usage during runtime requires use of `eval` (`evaluate`, `evaluateSync`, `run`) in order to transform markdown to executable JS, unfortunately not all environments allow for use of `eval` - like Cloudflare Workers.
+`@mdx-js/mdx` usage during runtime requires use of `eval` (`evaluate` and `evaluateSync`) in order to transform and run mdx, unfortunately not all environments allow for use of `eval` - like Cloudflare Workers.
 
-`mdxlite` works a bit like `@mdx-js/mdx`, in that you can take a string of markdown with JSX and transform it without using `eval` or `new Function()`. See [unsupported features](#unsupported-mdx-features) for more details.
+`mdxlite` works similar to `@mdx-js/mdx`, in that you can take a string of markdown with JSX and transform it, yet does so without using `eval` or `new Function()`!
 
 ## Getting Started:
 
@@ -20,10 +20,39 @@ import { transformMarkdown } from 'mdxlite';
 async function AsyncMarkdown({ children }): Promise<ReactNode> {
   return await transformMarkdown({
     markdown: children
+    // You can also provide custom components here:
+    components: {
+      Greeting({children}) {
+        return <marquee>{children}</marquee>
+      }
+    },
+    // as well as any imports that might occur within the MDX string
+    // **ALL** imports within the markdown string __must__ be provided here
+    imports: {
+      './foo': {
+        namedExport: true,
+        default: function DefaultExport() {
+          return 'something';
+        }
+      }
+    }
   });
 }
 
 async function handleRequest() {
+
+  let markdownString = `
+# Hello World!
+
+import Foo, {namedExport} from './foo';
+
+<Foo />
+
+export const message = "hi there!"
+
+{namedExport ? message : '🥷'}
+`.trim();
+
   let body = await renderToReadableStream(
     <AsyncMarkdown>{markdownString}</AsyncMarkdown>
   )
@@ -37,17 +66,6 @@ async function handleRequest() {
   );
 }
 ```
-
-## Unsupported MDX Features:
-
-This package is called `mdxlite` because it doesn't support everything that `@mdx-js/mdx` does out of the box. Primarily because most of those features either require that you pre-build MDX -> JS, or that you have access to `eval` or `new Function()`.
-
-Specifically:
-
-- `import` and `export`
-- JS expressions, e.g. `{4+5}`
-
-`mdxlite` does support custom components within the markdown string, but those need to be passed into the `transformMarkdown` function as the `components` parameter.
 
 ## Credits:
 

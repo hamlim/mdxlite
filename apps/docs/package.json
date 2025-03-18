@@ -1,5 +1,5 @@
 {
-  "name": "@garbanzo/template",
+  "name": "docs",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -24,7 +24,16 @@
     "rehype-raw": "^7.0.0",
     "shiki": "^3.2.1",
     "waku": "0.21.22",
-    "wrangler": "4.0.0"
+    "wrangler": "4.0.0",
+    "hast-util-to-jsx-runtime": "2.3.6",
+    "html-url-attributes": "3.0.1",
+    "remark-parse": "11.0.0",
+    "remark-rehype": "11.0.0",
+    "unified": "11.0.5",
+    "unist-util-visit": "5.0.0",
+    "sval": "0.6.3",
+    "estree-util-visit": "2.0.0",
+    "remark-mdx": "3.1.0"
   },
   "imports": {
     "#utils/*": "./src/utils/*"
