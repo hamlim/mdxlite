@@ -35,17 +35,17 @@ export function createProcessor(
 ): Processor<Root, Root, Root, undefined, undefined> {
   let rehypePlugins = options.rehypePlugins || emptyPlugins;
   let remarkPlugins = [
-    ...(options.remarkPlugins || emptyPlugins),
     ...defaultRemarkPlugins,
+    ...(options.remarkPlugins || emptyPlugins),
   ];
   let remarkRehypeOptions = options.remarkRehypeOptions
     ? {
-        ...options.remarkRehypeOptions,
         ...emptyRemarkRehypeOptions,
+        ...options.remarkRehypeOptions,
         passThrough: [
-          ...(options.remarkRehypeOptions.passThrough || []),
           // @ts-expect-error: passThrough is an array, so it's spreadable
           ...emptyRemarkRehypeOptions.passThrough,
+          ...(options.remarkRehypeOptions.passThrough || []),
         ],
       }
     : emptyRemarkRehypeOptions;

@@ -1,5 +1,9 @@
 ### Unreleased:
 
+### [1.0.1] - December 18th, 2025
+
+- Fixed order of `remarkRehypeOptions` such that provided options override defaults within the package
+
 ### [1.0.0] - March 18th, 2024
 
 - Added support for all MDX features (`import`s, `export`s, and inline expressions)!
