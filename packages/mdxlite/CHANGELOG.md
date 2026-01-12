@@ -1,5 +1,7 @@
 ### Unreleased:
 
+### [1.0.2] - January 12th, 2026
+
 - Fix applying multiple remark/rehype plugins with options.
 
 ### [1.0.1] - December 18th, 2025
