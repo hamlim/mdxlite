@@ -1,5 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import { renderToReadableStream } from "react-dom/server";
+import { visit } from "unist-util-visit";
 import { transformMarkdown } from "../index";
 
 describe("transformMarkdown", () => {
@@ -141,5 +142,62 @@ export const message = "hi there!"
 <!-- -->something<!-- -->
 <!-- -->
 <marquee>hi there!</marquee>`);
+  });
+
+  it("should apply multiple remark and rehype plugins", async () => {
+    let markdownString = `Hello`;
+    function AsyncMarkdown({ children }: { children: string }) {
+      return transformMarkdown({
+        markdown: children,
+        remarkPlugins: [
+          [
+            (suffix: string) => (tree) => {
+              visit(tree, "text", (node) => {
+                node.value += suffix;
+              });
+            },
+            " A",
+          ],
+          [
+            (suffix: string) => (tree) => {
+              visit(tree, "text", (node) => {
+                node.value += suffix;
+              });
+            },
+            " B",
+          ],
+        ],
+        rehypePlugins: [
+          [
+            (fromTag: string, toTag: string) => (tree) => {
+              visit(tree, "element", (node) => {
+                if (node.tagName === fromTag) {
+                  node.tagName = toTag;
+                }
+              });
+            },
+            "p",
+            "div",
+          ],
+          [
+            (fromTag: string, toTag: string) => (tree) => {
+              visit(tree, "element", (node) => {
+                if (node.tagName === fromTag) {
+                  node.tagName = toTag;
+                }
+              });
+            },
+            "div",
+            "section",
+          ],
+        ],
+      });
+    }
+    const stream = await renderToReadableStream(
+      <AsyncMarkdown>{markdownString}</AsyncMarkdown>,
+    );
+    let resp = new Response(stream);
+
+    expect(await resp.text()).toBe(`<section>Hello A B</section>`);
   });
 });

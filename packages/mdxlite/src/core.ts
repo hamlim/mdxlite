@@ -52,9 +52,9 @@ export function createProcessor(
 
   let processor = unified()
     .use(remarkParse)
-    .use(...remarkPlugins.flat())
+    .use(remarkPlugins)
     .use(remarkRehype, remarkRehypeOptions)
-    .use(...rehypePlugins.flat());
+    .use(rehypePlugins);
 
   return processor as Processor<Root, Root, Root, undefined, undefined>;
 }
