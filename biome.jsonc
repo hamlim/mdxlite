@@ -23,6 +23,12 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "correctness": {
+        "noUnknownProperty": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off"
+      },
       "style": {
         "useConst": "off",
         "noUnusedTemplateLiteral": "off"
@@ -36,6 +42,12 @@
         "enabled": true,
         "rules": {
           "recommended": true,
+          "correctness": {
+            "noUnknownProperty": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          },
           "style": {
             "useConst": "off",
             "noUnusedTemplateLiteral": "off"

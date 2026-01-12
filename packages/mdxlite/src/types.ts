@@ -28,12 +28,10 @@ export type Components = {
     ?
         | ComponentType<JSX.IntrinsicElements[Key] & ExtraProps>
         | keyof JSX.IntrinsicElements
-    : // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      ComponentType<any> | keyof JSX.IntrinsicElements;
+    : ComponentType<any> | keyof JSX.IntrinsicElements;
 };
 
 // Can be a "module" (e.g. object with default, or named export keys), or just a value
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export type ModuleValue = any;
 
 export type ModuleLike =
