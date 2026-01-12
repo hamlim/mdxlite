@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "root",
@@ -21,12 +22,12 @@
         "daisyui": "5.0.4",
         "estree-util-visit": "2.0.0",
         "hast-util-to-jsx-runtime": "2.3.6",
-        "hono": "4.6.20",
+        "hono": "4.10.3",
         "html-url-attributes": "3.0.1",
         "mdxlite": "workspace:*",
         "react": "19.0.0",
         "react-dom": "19.0.0",
-        "react-server-dom-webpack": "19.0.0",
+        "react-server-dom-webpack": "19.0.3",
         "rehype-raw": "^7.0.0",
         "remark-mdx": "3.1.0",
         "remark-parse": "11.0.0",
@@ -73,7 +74,7 @@
     },
     "packages/mdxlite": {
       "name": "mdxlite",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "devDependencies": {
         "@happy-dom/global-registrator": "17.4.4",
         "@swc/cli": "0.3.10",
@@ -1042,7 +1043,7 @@
 
     "hohoro": ["hohoro@0.3.0", "", { "dependencies": { "debug": "4.3.4", "fast-glob": "3.3.2" }, "peerDependencies": { "oxc-transform": "0.30.4" }, "bin": { "hohoro": "bin/index.mjs", "hohoro-experimental": "bin/experimental.mjs" } }, "sha512-EreWok714cpzEkuaJ6VJf3e7pAYGoM345lFUMa1YsHpqcGGO/18oiLfLkQpJzlS54S/3y1Zd5ErgCcfcVTlkEg=="],
 
-    "hono": ["hono@4.6.20", "", {}, "sha512-5qfNQeaIptMaJKyoJ6N/q4gIq0DBp2FCRaLNuUI3LlJKL4S37DY/rLL1uAxA4wrPB39tJ3s+f7kgI79O4ScSug=="],
+    "hono": ["hono@4.10.3", "", {}, "sha512-2LOYWUbnhdxdL8MNbNg9XZig6k+cZXm5IjHn2Aviv7honhBMOHb+jxrKIeJRZJRmn+htUCKhaicxwXuUDlchRA=="],
 
     "html-url-attributes": ["html-url-attributes@3.0.1", "", {}, "sha512-ol6UPyBWqsrO6EJySPz2O7ZSr856WDrEzM5zMqp+FJJLGMW35cLYmmZnl0vztAZxRUoNZJFTCohfjuIJ8I4QBQ=="],
 
@@ -1466,7 +1467,7 @@
 
     "react-remove-scroll-bar": ["react-remove-scroll-bar@2.3.8", "", { "dependencies": { "react-style-singleton": "^2.2.2", "tslib": "^2.0.0" }, "peerDependencies": { "@types/react": "*", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" }, "optionalPeers": ["@types/react"] }, "sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q=="],
 
-    "react-server-dom-webpack": ["react-server-dom-webpack@19.0.0", "", { "dependencies": { "acorn-loose": "^8.3.0", "neo-async": "^2.6.1", "webpack-sources": "^3.2.0" }, "peerDependencies": { "react": "^19.0.0", "react-dom": "^19.0.0", "webpack": "^5.59.0" } }, "sha512-hLug9KEXLc8vnU9lDNe2b2rKKDaqrp5gNiES4uyu2Up3FZfZJZmdwLFXlWzdA9gTB/6/cWduSB2K1Lfag2pSvw=="],
+    "react-server-dom-webpack": ["react-server-dom-webpack@19.0.3", "", { "dependencies": { "acorn-loose": "^8.3.0", "neo-async": "^2.6.1", "webpack-sources": "^3.2.0" }, "peerDependencies": { "react": "^19.0.3", "react-dom": "^19.0.3", "webpack": "^5.59.0" } }, "sha512-Ri1trzmT2G2ZTrummbbJca306MKyXpI8l4B7j1F8jGCjykUHCaojwtXBr/luEiRSFzQRkYBkH+wabfppP3x/IQ=="],
 
     "react-style-singleton": ["react-style-singleton@2.2.3", "", { "dependencies": { "get-nonce": "^1.0.0", "tslib": "^2.0.0" }, "peerDependencies": { "@types/react": "*", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc" }, "optionalPeers": ["@types/react"] }, "sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ=="],
 
