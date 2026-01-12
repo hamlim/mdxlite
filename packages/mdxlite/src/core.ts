@@ -17,7 +17,7 @@ import type { BuildVisitor } from "unist-util-visit";
 import { VFile } from "vfile";
 import type { Components, ModuleLike, Options } from "./types";
 
-let emptyPlugins: Array<PluggableList> = [];
+let emptyPlugins: PluggableList = [];
 let emptyRemarkRehypeOptions: Readonly<RemarkRehypeOptions> = {
   allowDangerousHtml: true,
   passThrough: [
@@ -28,13 +28,13 @@ let emptyRemarkRehypeOptions: Readonly<RemarkRehypeOptions> = {
     "mdxTextExpression",
   ],
 };
-let defaultRemarkPlugins = [remarkMdx];
+let defaultRemarkPlugins: PluggableList = [remarkMdx];
 
 export function createProcessor(
   options: Options,
 ): Processor<Root, Root, Root, undefined, undefined> {
-  let rehypePlugins = options.rehypePlugins || emptyPlugins;
-  let remarkPlugins = [
+  let rehypePlugins: PluggableList = options.rehypePlugins || emptyPlugins;
+  let remarkPlugins: PluggableList = [
     ...(options.remarkPlugins || emptyPlugins),
     ...defaultRemarkPlugins,
   ];
