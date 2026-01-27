@@ -16,7 +16,7 @@
     "@shikijs/themes": "^3.2.1",
     "@tailwindcss/typography": "0.5.16",
     "daisyui": "5.0.4",
-    "hono": "4.11.4",
+    "hono": "4.11.7",
     "mdxlite": "workspace:*",
     "react": "19.0.0",
     "react-dom": "19.0.0",
