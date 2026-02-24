@@ -24,7 +24,7 @@
     "rehype-raw": "^7.0.0",
     "shiki": "^3.2.1",
     "waku": "0.21.22",
-    "wrangler": "4.0.0",
+    "wrangler": "4.59.1",
     "hast-util-to-jsx-runtime": "2.3.6",
     "html-url-attributes": "3.0.1",
     "remark-parse": "11.0.0",
