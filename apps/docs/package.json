@@ -48,7 +48,7 @@
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "miniflare": "3.20250129.0",
-    "postcss": "8.5.2",
+    "postcss": "8.5.10",
     "rehype-mdx-code-props": "3.0.1",
     "remark-flexible-markers": "1.2.1",
     "remark-frontmatter": "5.0.0",
